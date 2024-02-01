@@ -1,12 +1,14 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction } from "@remix-run/node";
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigation,
 } from "@remix-run/react";
 
 export const links: LinksFunction = () => [
@@ -14,6 +16,9 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
+  // ページ全体でローディング状態を見る
+  const navigation = useNavigation();
+
   return (
     <html lang="en">
       <head>
@@ -23,6 +28,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        {navigation.state === "loading" && <p>Loading...</p>}
         <Outlet />
         <ScrollRestoration />
         <Scripts />
