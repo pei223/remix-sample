@@ -22,7 +22,7 @@ export default function NavigationHeader({ className }: { className: string }) {
         </a>
       </li>
       {links.map((v) => (
-        <li className="mr-6">
+        <li key={v.url} className="mr-6">
           <a className="text-white hover:text-blue-200" href={v.url}>
             {v.displayName}
           </a>
