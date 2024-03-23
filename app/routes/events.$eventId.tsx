@@ -10,6 +10,7 @@ import {
 } from "@remix-run/react";
 import { useEffect } from "react";
 import ErrorView from "~/components/Error";
+import Spinner from "~/components/Spinner";
 
 // ここをコメントアウトすると、eventsのエラー画面になる
 export function ErrorBoundary() {
@@ -42,7 +43,6 @@ export default function Event() {
   const navigate = useNavigate();
   // 初回のHTMLロードではなくクライアント側の遷移の場合ローディングがある.
   // その場合のページのロード状況を保持.
-  const navigation = useNavigation();
   const revalidate = useRevalidator();
   console.debug(`render event page `);
 
@@ -60,35 +60,28 @@ export default function Event() {
   //   }
 
   return (
-    <>
-      {navigation.state === "idle" ? (
-        <div
-          style={{
-            margin: "0px 16px",
-          }}
-        >
-          <h3>{item["名称"][1]["表記"]}</h3>
-          <button
-            onClick={() => {
-              console.log(`reload from loader`);
-              revalidate.revalidate();
-            }}
-          >
-            {revalidate.state === "loading" ? "..." : "reload"}
-          </button>
-          <pre
-            style={{
-              whiteSpace: "break-spaces",
-            }}
-          >
-            {JSON.stringify(item)}
-          </pre>
-          <button onClick={linkToPlace}>開催場所</button>
-          <Outlet />
-        </div>
-      ) : (
-        <div>Loading...</div>
-      )}
-    </>
+    <div className="mx-4 my-0">
+      <h2 className=" font-medium text-xl">{item["名称"][1]["表記"]}</h2>
+      <button
+        className="bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded my-3"
+        onClick={() => {
+          console.log(`reload from loader`);
+          revalidate.revalidate();
+        }}
+      >
+        {revalidate.state === "loading" && <Spinner color="fill-blue-400" />}
+        Reload
+      </button>
+      <pre className="p-2 my-4 bg-black/[0.1] whitespace-break-spaces">
+        {JSON.stringify(item)}
+      </pre>
+      <button
+        className="bg-transparent hover:bg-blue-100 border text-blue-600 border-blue-600 px-2 py-1 rounded"
+        onClick={linkToPlace}
+      >
+        開催場所を表示
+      </button>
+      <Outlet />
+    </div>
   );
 }

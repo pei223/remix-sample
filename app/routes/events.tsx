@@ -53,7 +53,7 @@ export default function Events() {
         イベント一覧
       </h1>
       <div className="flex">
-        <div className="flex p-4 flex-col justify-between min-w-[300px] max-w-[300px] bg-black/[0.1] border-r border-b border-black/[0.4]">
+        <div className="flex flex-col justify-between min-w-[300px] max-w-[300px] p-4  bg-black/[0.1] border-r border-b border-black/[0.4]">
           <div>
             {items[0].map((v) => (
               <div

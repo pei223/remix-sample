@@ -11,16 +11,8 @@ export default function Place() {
   }, []);
 
   return (
-    <div
-      style={{
-        margin: "0px 16px",
-      }}
-    >
-      <pre
-        style={{
-          whiteSpace: "break-spaces",
-        }}
-      >
+    <div className="my-4">
+      <pre className="p-2 bg-black/[0.1] whitespace-break-spaces">
         {JSON.stringify(place)}
       </pre>
     </div>
