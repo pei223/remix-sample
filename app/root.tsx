@@ -2,7 +2,6 @@ import { cssBundleHref } from "@remix-run/css-bundle";
 import stylesheet from "./tailwind.css";
 import type { LinksFunction } from "@remix-run/node";
 import {
-  Link,
   Links,
   LiveReload,
   Meta,
@@ -12,6 +11,7 @@ import {
   useNavigation,
 } from "@remix-run/react";
 import LinearLoading from "./components/LinearLoading";
+import NavigationHeader from "./components/NavigationHeader";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref
@@ -36,7 +36,10 @@ export default function App() {
       </head>
       <body>
         {navigation.state === "loading" && <LinearLoading />}
-        <Outlet />
+        <NavigationHeader className="w-full sticky top-0" />
+        <div className="mt-3 mb-5">
+          <Outlet />
+        </div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
