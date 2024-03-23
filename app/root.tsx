@@ -1,4 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
+import stylesheet from "./tailwind.css";
 import type { LinksFunction } from "@remix-run/node";
 import {
   Link,
@@ -10,9 +11,15 @@ import {
   ScrollRestoration,
   useNavigation,
 } from "@remix-run/react";
+import LinearLoading from "./components/LinearLoading";
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  ...(cssBundleHref
+    ? [
+        { rel: "stylesheet", href: cssBundleHref },
+        { rel: "stylesheet", href: stylesheet },
+      ]
+    : []),
 ];
 
 export default function App() {
@@ -28,7 +35,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        {navigation.state === "loading" && <p>Loading...</p>}
+        {navigation.state === "loading" && <LinearLoading />}
         <Outlet />
         <ScrollRestoration />
         <Scripts />
