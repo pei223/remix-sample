@@ -49,44 +49,36 @@ export default function Events() {
 
   return (
     <>
-      <h1 className={commonCss.title}>イベント一覧</h1>
-      <div
-        style={{
-          display: "flex",
-        }}
-      >
-        <div
-          style={{
-            minWidth: "30%",
-            maxWidth: "300px",
-            backgroundColor: "rgba(0, 0, 0, 0.1)",
-            borderRight: "1px solid grey",
-          }}
-        >
-          {items[0].map((v) => (
-            <div
-              key={v["名称"]}
-              style={{
-                margin: "8px 16px 8px 8px",
-              }}
-            >
-              <Link to={`/events/${v["ID"]["識別値"]}`}>
-                {v["名称"][1]["表記"]}
-              </Link>
-            </div>
-          ))}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+      <h1 className={`${commonCss.title} text-2xl m-3 font-thin`}>
+        イベント一覧
+      </h1>
+      <div className="flex">
+        <div className="flex p-4 flex-col justify-between min-w-[300px] max-w-[300px] bg-black/[0.1] border-r border-b border-black/[0.4]">
+          <div>
+            {items[0].map((v) => (
+              <div
+                key={v["名称"]}
+                className="my-3 underline text-blue-600 hover:no-underline"
+              >
+                <Link to={`/events/${v["ID"]["識別値"]}`}>
+                  {v["名称"][1]["表記"]}
+                </Link>
+              </div>
+            ))}
+          </div>
+          <div className="flex mt-4 justify-center">
             <button onClick={() => linkTo(null)}>TOP</button>
-            <button onClick={() => linkTo(items[1]["endCursor"])}>→</button>
+            <button
+              className="ml-2"
+              onClick={() => linkTo(items[1]["endCursor"])}
+            >
+              →
+            </button>
           </div>
         </div>
-        <Outlet />
+        <div>
+          <Outlet />
+        </div>
       </div>
     </>
   );
