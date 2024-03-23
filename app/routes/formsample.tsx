@@ -106,10 +106,7 @@ export default function FormSample() {
   return (
     // 複数フォームがあるならinput hiddenなどで対処できる
     //https://github.com/remix-run/remix/discussions/1569
-    <Form
-      method="post"
-      className="ml-auto mr-auto mt-8 max-w-xs bg-white shadow-md rounded p-6"
-    >
+    <Form method="post" className="ml-auto mr-auto mt-8 form-card">
       <div>
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Name
@@ -118,7 +115,7 @@ export default function FormSample() {
           type="text"
           name="name"
           placeholder="name"
-          className="shadow appearance-none border rounded leading-tight w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+          className="text-input"
           defaultValue={data.name}
         />
         {error?.name != null && (
@@ -133,7 +130,7 @@ export default function FormSample() {
           type="text"
           name="value"
           placeholder="value"
-          className="shadow appearance-none border rounded leading-tight w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+          className="text-input"
           defaultValue={data.value}
         />
         {error?.value != null && (

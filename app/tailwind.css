@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .form-card {
+        @apply max-w-xs bg-white shadow-md rounded p-6;
+    }
+
+    .text-input {
+        @apply shadow appearance-none border rounded leading-tight w-full py-2 px-3 focus:outline-none focus:shadow-outline;
+    }
+}

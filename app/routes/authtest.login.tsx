@@ -19,10 +19,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function FormSample() {
   return (
-    <Form
-      method="post"
-      className="ml-auto mr-auto mt-8 max-w-xs bg-white shadow-md rounded p-6"
-    >
+    <Form method="post" className="ml-auto mr-auto mt-8 form-card">
       <div>
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Username
@@ -31,7 +28,7 @@ export default function FormSample() {
           type="text"
           name="uname"
           placeholder="Username"
-          className="shadow appearance-none border rounded leading-tight w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+          className="text-input"
         />
       </div>
       <div className="mt-4">
@@ -42,7 +39,7 @@ export default function FormSample() {
           type="text"
           name="passwd"
           placeholder="Password"
-          className="shadow appearance-none border rounded leading-tight w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+          className="text-input"
         />
       </div>
       <div className="mt-8">
