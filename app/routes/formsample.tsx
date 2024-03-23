@@ -10,6 +10,7 @@ import {
 } from "@remix-run/react";
 import ErrorView from "~/components/Error";
 import fs from "fs";
+import Spinner from "~/components/Spinner";
 
 const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -92,7 +93,6 @@ export default function FormSample() {
   const navigation = useNavigation();
   console.debug(`render formsample page`);
   console.log(error, data);
-  data.name;
   // state経由にする
 
   // Actionが実行されると自動でloaderが再実行される
@@ -105,24 +105,65 @@ export default function FormSample() {
 
   return (
     // 複数フォームがあるならinput hiddenなどで対処できる
-    // https://github.com/remix-run/remix/discussions/1569
-    <Form method="post">
-      <p>
-        name: <input type="text" name="name" defaultValue={data.name} />
-        {error?.name != null && <span>{error.name}</span>}
-      </p>
-      <p>
-        value: <input type="text" name="value" defaultValue={data.value} />
-        {error?.value != null && <span>{error.value}</span>}
-      </p>
-      <p>
-        <button type="submit">
-          {navigation.state === "submitting" ? "..." : "submit"}
+    //https://github.com/remix-run/remix/discussions/1569
+    <Form
+      method="post"
+      className="ml-auto mr-auto mt-8 max-w-xs bg-white shadow-md rounded p-6"
+    >
+      <div>
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Name
+        </label>
+        <input
+          type="text"
+          name="name"
+          placeholder="name"
+          className="shadow appearance-none border rounded leading-tight w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+          defaultValue={data.name}
+        />
+        {error?.name != null && (
+          <span className="text-red-500 text-sm">{error.name}</span>
+        )}
+      </div>
+      <div className="mt-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Value
+        </label>
+        <input
+          type="text"
+          name="value"
+          placeholder="value"
+          className="shadow appearance-none border rounded leading-tight w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+          defaultValue={data.value}
+        />
+        {error?.value != null && (
+          <span className="text-red-500 text-sm">{error.value}</span>
+        )}
+      </div>
+
+      <div className="mt-4">
+        <button
+          className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1 rounded my-3"
+          type="submit"
+        >
+          {navigation.state === "submitting" ? (
+            <Spinner color="fill-blue-400" />
+          ) : (
+            "submit"
+          )}
         </button>
-        <button type="button" onClick={clear}>
-          {navigation.state === "submitting" ? "..." : "clear"}
+        <button
+          className="ml-3 bg-transparent hover:bg-blue-100 border text-blue-600 border-blue-600 px-4 py-1 rounded"
+          type="button"
+          onClick={clear}
+        >
+          {navigation.state === "submitting" ? (
+            <Spinner color="fill-blue-400" />
+          ) : (
+            "clear"
+          )}
         </button>
-      </p>
+      </div>
     </Form>
   );
 }
